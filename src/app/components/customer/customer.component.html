@@ -1,0 +1,56 @@
+<div class="card p-2 custom-card">
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Surname</th>
+              <th scope="col">Phone Number</th>
+              <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let customer of customers; index as i">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ customer.name }}</td>
+              <td>{{ customer.surname }}</td>
+              <td>{{ customer.phoneNumber }}</td>
+              <td class="row">
+                    <div ngbDropdown class="d-inline-block">
+                      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Actions</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem>Edit</button>
+                        <button ngbDropdownItem (click)="deleteCustomer(customer)">Delete</button>
+                        <button ngbDropdownItem (click)="modalOpen(modalBasic)">Detail</button>
+                      </div>
+                    </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <!-- Modal -->
+          <ng-template #modalBasic let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel1">Basic Modal</h4>
+              <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" tabindex="0" ngbAutofocus>
+              <h5>Check First Paragraph</h5>
+              <p>
+                Oat cake ice cream candy chocolate cake chocolate cake cotton candy dragée apple pie. Brownie
+                carrot cake candy canes bonbon fruitcake topping halvah. Cake sweet roll cake cheesecake cookie
+                chocolate cake liquorice.
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" (click)="modal.close('Accept click')" rippleEffect>
+                Accept
+              </button>
+            </div>
+          </ng-template>
+          <!-- / Modal -->
+    </div>
+</div>
