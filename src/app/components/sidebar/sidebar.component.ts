@@ -8,6 +8,7 @@ import { menu } from 'src/app/menu/menu';
 export class SidebarComponent implements OnInit {
 
   menu: any;
+  currentPage:any;
   constructor() { 
     this.menu = menu;
   }
@@ -16,6 +17,11 @@ export class SidebarComponent implements OnInit {
     console.log("MENU",this.menu)
   }
 
+  setCurrentPage(item:any){
+    this.currentPage = item;
+  }
+
+  
 
   
 

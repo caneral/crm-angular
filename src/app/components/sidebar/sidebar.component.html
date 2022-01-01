@@ -1,21 +1,25 @@
-<nav class="sidebar">
-  <div class="sidebar-header">
-    <div class="subheader">
-      <div>
+<nav class="sidebar bg-white min-vh-100 top-0 bottom-0 position-fixed ">
+  <div class="sidebar-header d-flex mb-4 pt-4  align-items-center">
+    <div class="subheader d-flex align-items-center">
+      <div class="icon-div">
         <mat-icon class="icon">person</mat-icon>
       </div>
-      <div class="text">E-Ogrenci</div>
-    </div>
-  </div>
-  <ul>
-    <li *ngFor="let item of menu" >
-        <button class="btn nav-item">
-            <div class="nav-item-icon">
-                <mat-icon class="icon">{{item.icon}}</mat-icon>
-              </div>
-              <div class="item">{{item.title}}</div>
-        </button>
+      <div class="text w-100 d-inline-block rounded h5 font-weight-bold">
+        E-Customer
+      </div>
       
-    </li>
-  </ul>
+    </div>
+    <button class="btn lg:hidden" style="padding-left: 0.50rem">
+      <mat-icon style="font-size: 20px">close</mat-icon>
+    </button>
+  </div>
+
+    <div *ngFor="let item of menu" class="mb-2 nav-items"  (click)="setCurrentPage(item)" >
+        <button [routerLink]="[item.path]" routerLinkActive="active-nav-item  w-100 border-0" [routerLinkActiveOptions]="{exact: true}" class="nav-item"  >
+          <div class="nav-item-icon">
+            <mat-icon class="icon"  routerLinkActive="active-nav-icon" [routerLinkActiveOptions]="{exact: true}">{{ item.icon }}</mat-icon>
+          </div>
+          <div class="item">{{ item.title }}</div>
+        </button>
+    </div>
 </nav>
