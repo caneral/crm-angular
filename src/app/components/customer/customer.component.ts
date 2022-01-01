@@ -12,13 +12,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class CustomerComponent implements OnInit {
   customers: Customer[] = [];
-  customer: Customer = {
-    id:1,
-    name:"",
-    surname:"",
-    phoneNumber:"",
-    image:""
-  };
+  customer: Customer;
   constructor(private customerService: CustomerService,
     private modalService: NgbModal) {}
 

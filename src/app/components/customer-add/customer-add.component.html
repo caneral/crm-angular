@@ -1,4 +1,74 @@
 <div class="card p-2 custom-card">
-    <div class="card-body">
-    </div>
+  <div class="card-body">
+    <h1>Customer Add</h1>
+
+
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>ID Information</ng-template>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Name</label>
+            <input type="text" class="form-control"  placeholder="Name" formControlName="name" required>
+          </div>
+            
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Surname</label>
+            <input type="text" class="form-control"  placeholder="Surname" formControlName="surname" required>
+          </div>
+            
+          <div>
+            <button class="btn btn-info" mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Contact Information</ng-template>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Phone Number</label>
+            <input type="text" class="form-control"  placeholder="Phone Number" formControlName="phoneNumber" required>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">E-Mail</label>
+            <input type="text" class="form-control"  placeholder="E-Mail" formControlName="email" required>
+          </div>
+          <br />
+          <div>
+            <button class="btn btn-warning mr-2" mat-button matStepperPrevious>Back</button>
+            <button class="btn btn-info" mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+
+        <mat-list>
+          <mat-list-item>
+            <strong>Name: </strong>
+            {{this.firstFormGroup.value.name }}</mat-list-item
+          >
+          <mat-list-item>
+            <strong>Surname:</strong>
+            {{this.firstFormGroup.value.surname }}</mat-list-item
+          >
+          <mat-list-item>
+            <strong>Phone Number:</strong>
+            {{this.secondFormGroup.value.phoneNumber }}</mat-list-item
+          >
+          <mat-list-item>
+            <strong>Email:</strong>
+            {{this.secondFormGroup.value.email }}</mat-list-item
+          >
+        </mat-list>
+
+        <div>
+          <button class="btn btn-warning mr-2" mat-button matStepperPrevious>Back</button>
+          <button class="btn btn-danger mr-2" mat-button (click)="stepper.reset()">Reset</button>
+          <button class="btn btn-success mr-2" mat-button (click)="submit()" [routerLink]="['']">Submit</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
 </div>
