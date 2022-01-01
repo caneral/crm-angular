@@ -1,0 +1,10 @@
+.wrapper{
+    display: flex;
+    background-color: #f8f8f8;
+    min-height: 100vh;
+}
+@media (min-width: 1024px) {
+    .lg\:ml-64 {
+        margin-left: 16rem/* 256px */;
+    }
+}

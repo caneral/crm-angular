@@ -12,7 +12,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class CustomerComponent implements OnInit {
   customers: Customer[] = [];
-
+  customer: Customer = {
+    id:1,
+    name:"",
+    surname:"",
+    phoneNumber:"",
+    image:""
+  };
   constructor(private customerService: CustomerService,
     private modalService: NgbModal) {}
 
@@ -21,19 +27,27 @@ export class CustomerComponent implements OnInit {
   }
 
   getCustomer() {
-    CUSTOMERS.forEach((item) => {
-      CustomersDb.push(item);
-    });
+    if(CustomersDb.length<=0){
+      CUSTOMERS.forEach((item) => {
+        CustomersDb.push(item);
+      });
+    }
     this.customers = CustomersDb;
+
   }
 
   deleteCustomer(customer: Customer) {
     this.customerService.remove(customer);
   }
 
-  modalOpen(modalBasic:any) {
+  modalOpen(modalBasic:any, customerId:any) {
+    let customer = this.customers.find(c => c.id === customerId)
+    this.customer = customer!;
     this.modalService.open(modalBasic,{
       windowClass: 'modal',
     });
   }
+
+  
+
 }
