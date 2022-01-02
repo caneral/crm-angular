@@ -2,23 +2,99 @@
   <div class="card-body">
     <h1>Customer Add</h1>
 
-
     <mat-horizontal-stepper [linear]="isLinear" #stepper>
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
           <ng-template matStepLabel>ID Information</ng-template>
           <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Name</label>
-            <input type="text" class="form-control"  placeholder="Name" formControlName="name" required>
+            <label for="exampleFormControlInput1" class="form-label"
+              >Name</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Name"
+              formControlName="name"
+              required
+            />
+            <div
+              *ngIf="
+                firstFormGroup.get('name')?.invalid &&
+                firstFormGroup.get('name')?.errors &&
+                (firstFormGroup.get('name')?.dirty ||
+                  firstFormGroup.get('name')?.touched)
+              "
+            >
+              <span
+                *ngIf="firstFormGroup.get('name')?.hasError('required')"
+                class="text-danger"
+              >
+                Please enter name!
+              </span>
+              <span
+                *ngIf="firstFormGroup.get('name')?.hasError('minlength')"
+                class="text-danger"
+              >
+                The minimum length for this field is 2 characters.
+              </span>
+              <span
+                *ngIf="firstFormGroup.get('name')?.hasError('maxlength')"
+                class="text-danger"
+              >
+                The maximum length for this field is 50 charackters.
+              </span>
+            </div>
           </div>
-            
+
           <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Surname</label>
-            <input type="text" class="form-control"  placeholder="Surname" formControlName="surname" required>
+            <label for="exampleFormControlInput1" class="form-label"
+              >Surname</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Surname"
+              formControlName="surname"
+              required
+            />
+            <div
+              *ngIf="
+                firstFormGroup.get('surname')?.invalid &&
+                firstFormGroup.get('surname')?.errors &&
+                (firstFormGroup.get('surname')?.dirty ||
+                  firstFormGroup.get('surname')?.touched)
+              "
+            >
+              <span
+                *ngIf="firstFormGroup.get('surname')?.hasError('required')"
+                class="text-danger"
+              >
+                Please enter surname!
+              </span>
+              <span
+                *ngIf="firstFormGroup.get('surname')?.hasError('minlength')"
+                class="text-danger"
+              >
+                The minimum length for this field is 2 characters.
+              </span>
+              <span
+                *ngIf="firstFormGroup.get('surname')?.hasError('maxlength')"
+                class="text-danger"
+              >
+                The maximum length for this field is 50 charackters.
+              </span>
+            </div>
           </div>
-            
+
           <div>
-            <button class="btn btn-info" mat-button matStepperNext>Next</button>
+            <button
+              class="btn btn-info"
+              mat-button
+              matStepperNext
+              (click)="isValid(firstFormGroup.valid)"
+            >
+              Next
+            </button>
           </div>
         </form>
       </mat-step>
@@ -26,17 +102,91 @@
         <form [formGroup]="secondFormGroup">
           <ng-template matStepLabel>Contact Information</ng-template>
           <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Phone Number</label>
-            <input type="text" class="form-control"  placeholder="Phone Number" formControlName="phoneNumber" required>
+            <label for="exampleFormControlInput1" class="form-label"
+              >Phone Number</label
+            >
+            <input
+              type="string"
+              class="form-control"
+              placeholder="Phone Number"
+              formControlName="phoneNumber"
+              required
+            />
+            <div
+              *ngIf="
+                secondFormGroup.get('phoneNumber')?.invalid &&
+                secondFormGroup.get('phoneNumber')?.errors &&
+                (secondFormGroup.get('phoneNumber')?.dirty ||
+                  secondFormGroup.get('phoneNumber')?.touched)
+              "
+            >
+              <span
+                *ngIf="secondFormGroup.get('phoneNumber')?.hasError('required')"
+                class="text-danger"
+              >
+                Please enter your phone number!
+              </span>
+              <span
+                *ngIf="secondFormGroup.get('phoneNumber')?.hasError('minlength')"
+                class="text-danger"
+              >
+                The minimum length for this field is 11 characters.
+              </span>
+              <span
+                *ngIf="secondFormGroup.get('phoneNumber')?.hasError('maxlength')"
+                class="text-danger"
+              >
+                The maximum length for this field is 11 charackters.
+              </span>
+            </div>
           </div>
           <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">E-Mail</label>
-            <input type="text" class="form-control"  placeholder="E-Mail" formControlName="email" required>
+            <label for="exampleFormControlInput1" class="form-label"
+              >E-Mail</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              placeholder="E-Mail"
+              formControlName="email"
+              required
+            />
+            <div
+              *ngIf="
+                secondFormGroup.get('email')?.invalid &&
+                secondFormGroup.get('email')?.errors &&
+                (secondFormGroup.get('email')?.dirty ||
+                  secondFormGroup.get('email')?.touched)
+              "
+            >
+              <span
+                *ngIf="secondFormGroup.get('email')?.hasError('required')"
+                class="text-danger"
+              >
+                Please enter your email address!
+              </span>
+              <span
+                *ngIf="secondFormGroup.get('email')?.hasError('email')"
+                class="text-danger"
+              >
+                Invalid email address!
+              </span>
+              
+            </div>
           </div>
           <br />
           <div>
-            <button class="btn btn-warning mr-2" mat-button matStepperPrevious>Back</button>
-            <button class="btn btn-info" mat-button matStepperNext>Next</button>
+            <button class="btn btn-warning mr-2" mat-button matStepperPrevious>
+              Back
+            </button>
+            <button
+              class="btn btn-info"
+              mat-button
+              matStepperNext
+              (click)="isValid(secondFormGroup.valid)"
+            >
+              Next
+            </button>
           </div>
         </form>
       </mat-step>
@@ -47,26 +197,41 @@
         <mat-list>
           <mat-list-item>
             <strong>Name: </strong>
-            {{this.firstFormGroup.value.name }}</mat-list-item
+            {{ this.firstFormGroup.value.name }}</mat-list-item
           >
           <mat-list-item>
             <strong>Surname:</strong>
-            {{this.firstFormGroup.value.surname }}</mat-list-item
+            {{ this.firstFormGroup.value.surname }}</mat-list-item
           >
           <mat-list-item>
             <strong>Phone Number:</strong>
-            {{this.secondFormGroup.value.phoneNumber }}</mat-list-item
+            {{ this.secondFormGroup.value.phoneNumber }}</mat-list-item
           >
           <mat-list-item>
             <strong>Email:</strong>
-            {{this.secondFormGroup.value.email }}</mat-list-item
+            {{ this.secondFormGroup.value.email }}</mat-list-item
           >
         </mat-list>
 
         <div>
-          <button class="btn btn-warning mr-2" mat-button matStepperPrevious>Back</button>
-          <button class="btn btn-danger mr-2" mat-button (click)="stepper.reset()">Reset</button>
-          <button class="btn btn-success mr-2" mat-button (click)="submit()" [routerLink]="['']">Submit</button>
+          <button class="btn btn-warning mr-2" mat-button matStepperPrevious>
+            Back
+          </button>
+          <button
+            class="btn btn-danger mr-2"
+            mat-button
+            (click)="stepper.reset()"
+          >
+            Reset
+          </button>
+          <button
+            class="btn btn-success mr-2"
+            mat-button
+            (click)="submit()"
+            [routerLink]="['']"
+          >
+            Submit
+          </button>
         </div>
       </mat-step>
     </mat-horizontal-stepper>

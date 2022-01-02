@@ -4,4 +4,5 @@ export interface Customer {
     surname: string;
     phoneNumber: string;
     image: string;
+    email: string;
 }

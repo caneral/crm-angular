@@ -14,7 +14,6 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("MENU",this.menu)
   }
 
   setCurrentPage(item:any){

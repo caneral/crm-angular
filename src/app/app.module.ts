@@ -11,6 +11,14 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { CustomerAddComponent } from './components/customer-add/customer-add.component';
 
+//Forms
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatListModule} from '@angular/material/list';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +33,13 @@ import { CustomerAddComponent } from './components/customer-add/customer-add.com
     AppRoutingModule,
     NgbModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    MatStepperModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatListModule
     
   ],
   providers: [],

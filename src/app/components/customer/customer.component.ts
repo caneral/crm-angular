@@ -21,13 +21,7 @@ export class CustomerComponent implements OnInit {
   }
 
   getCustomer() {
-    if(CustomersDb.length<=0){
-      CUSTOMERS.forEach((item) => {
-        CustomersDb.push(item);
-      });
-    }
     this.customers = CustomersDb;
-
   }
 
   deleteCustomer(customer: Customer) {
