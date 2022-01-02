@@ -17,6 +17,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatListModule} from '@angular/material/list';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 @NgModule({
@@ -39,8 +40,8 @@ import {MatListModule} from '@angular/material/list';
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
-    MatListModule
-    
+    MatListModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

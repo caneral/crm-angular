@@ -1,8 +1,10 @@
+import Swal from 'sweetalert2';
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Customer } from 'src/app/@core/types/customer';
 import { CustomersDb } from 'src/fakedb/customersDb';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-customer-add',
   templateUrl: './customer-add.component.html',
@@ -13,7 +15,7 @@ export class CustomerAddComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(private _formBuilder: FormBuilder, private router:Router) {}
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -37,6 +39,7 @@ export class CustomerAddComponent implements OnInit {
         'http://web.stanford.edu/group/cui_group/images/members/louisa.JPG',
     };
     CustomersDb.push(customer);
+    return true;
   }
 
   getRandomId(min: number, max: number) {
@@ -44,4 +47,35 @@ export class CustomerAddComponent implements OnInit {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
+
+ 
+  confirmBox(){
+    Swal.fire({
+      title: 'Do you approve the transaction?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes!',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      console.log("Result:",result)
+      if (result.value) {
+        if(this.submit()){
+          Swal.fire(
+            'Added!',
+            'The client has been successfully added.',
+            'success'
+          ).then(result => {
+            this.router.navigate(['']);
+          })
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Adding customer has been cancelled.',
+          'error'
+        )
+      }
+    })
+  }
+
 }
