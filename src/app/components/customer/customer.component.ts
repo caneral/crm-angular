@@ -1,7 +1,6 @@
 import { CustomerService } from './../../services/customer.service';
 import { Customer } from './../../@core/types/customer';
 import { Component, OnInit } from '@angular/core';
-import { CUSTOMERS } from 'src/fakedb/customers';
 import { CustomersDb } from 'src/fakedb/customersDb';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -10,30 +9,46 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.scss'],
 })
-export class CustomerComponent implements OnInit {
-  customers: Customer[] = [];
-  customer: Customer;
+export class CustomerComponent implements OnInit  {
+  // customers: Customer[] = [];
+   customer: Customer;
+  // constructor(private customerService: CustomerService,
+  //   private modalService: NgbModal) {}
+
+   ngOnInit(): void {
+     this.refreshCustomers();
+   }
+
+    getCustomer() {
+      this.customers = CustomersDb;
+    }
+
+   deleteCustomer(customer: Customer) {
+     this.customerService.remove(customer);
+     this.refreshCustomers();
+   }
+
+   modalOpen(modalBasic:any, customerId:any) {
+     let customer = this.customers.find(c => c.id === customerId)
+     this.customer = customer!;
+     this.modalService.open(modalBasic,{
+       windowClass: 'modal',
+     });
+   }
+
+  page = 1;
+  pageSize = 4;
+  collectionSize = CustomersDb.length;
+  customers: Customer[];
+
   constructor(private customerService: CustomerService,
-    private modalService: NgbModal) {}
-
-  ngOnInit(): void {
-    this.getCustomer();
+    private modalService: NgbModal ) {
   }
 
-  getCustomer() {
-    this.customers = CustomersDb;
-  }
-
-  deleteCustomer(customer: Customer) {
-    this.customerService.remove(customer);
-  }
-
-  modalOpen(modalBasic:any, customerId:any) {
-    let customer = this.customers.find(c => c.id === customerId)
-    this.customer = customer!;
-    this.modalService.open(modalBasic,{
-      windowClass: 'modal',
-    });
+  refreshCustomers() {
+    this.customers = CustomersDb
+      .map((customer, i) => ({CustomerId: i+1,...customer}))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 
   

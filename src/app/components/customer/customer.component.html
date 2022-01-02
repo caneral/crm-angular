@@ -1,70 +1,83 @@
 <div class="card p-2 custom-card">
-  <div class="card-body">
-    <table class="table table-striped">
+  <div class="card-body ">
+    <table class="table">
       <thead>
-        <tr>
-          <th scope="col">CustomerId</th>
-          <th scope="col">Name</th>
-          <th scope="col">Surname</th>
-          <th scope="col">Phone Number</th>
-          <th scope="col">Actions</th>
-        </tr>
+      <tr>
+        <th scope="col">CustomerId</th>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Actions</th>
+      </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let customer of customers">
-          <th scope="row">{{ customer.id }}</th>
-          <td>{{ customer.name }}</td>
-          <td>{{ customer.surname }}</td>
-          <td>{{ customer.phoneNumber }}</td>
-          <td scope="row">
-            <div ngbDropdown class="d-inline-block">
-              <button
-                class="btn btn-outline-primary"
-                id="dropdownBasic1"
-                ngbDropdownToggle
-              >
-                Actions
+      <tr *ngFor="let customer of customers">
+        <th scope="row">{{ customer.id }}</th>
+        <td>
+          {{ customer.name }}
+        </td>
+        <td>{{ customer.surname }}</td>
+        <td>{{ customer.phoneNumber}}</td>
+        <td scope="row">
+          <div ngbDropdown class="d-inline-block">
+            <button
+              class="btn btn-outline-primary"
+              id="dropdownBasic1"
+              ngbDropdownToggle
+            >
+              Actions
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem (click)="deleteCustomer(customer)">
+                Delete
               </button>
-              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button ngbDropdownItem (click)="deleteCustomer(customer)">
-                  Delete
-                </button>
-                <button
-                  ngbDropdownItem
-                  (click)="modalOpen(modalBasic, customer.id)"
-                >
-                  Detail
-                </button>
-              </div>
+              <button
+                ngbDropdownItem
+                (click)="modalOpen(modalBasic, customer.id)"
+              >
+                Detail
+              </button>
             </div>
-          </td>
-        </tr>
+          </div>
+        </td>
+      </tr>
       </tbody>
     </table>
-    <!-- Modal -->
-    <ng-template #modalBasic let-modal>
-      <div class="modal-header">
-        <button
-          type="button"
-          class="close"
-          (click)="modal.dismiss('Cross click')"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" tabindex="0" ngbAutofocus>
-        <div class="card" style="width: 100%">
-          <img src="{{ customer.image }}" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">
-              {{ customer.name + " " + customer.surname }}
-            </h5>
-            <p class="card-text">{{ customer.phoneNumber }}</p>
+    
+    <div class="d-flex justify-content-between p-2">
+      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCustomers()">
+      </ngb-pagination>
+    
+      <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCustomers()">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+      </select>
+      <!-- Modal -->
+      <ng-template #modalBasic let-modal>
+        <div class="modal-header">
+          <button
+            type="button"
+            class="close"
+            (click)="modal.dismiss('Cross click')"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" tabindex="0" ngbAutofocus>
+          <div class="card" style="width: 100%">
+            <img src="{{ customer.image }}" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">
+                {{ customer.name + " " + customer.surname }}
+              </h5>
+              <p class="card-text">{{ customer.phoneNumber }}</p>
+            </div>
           </div>
         </div>
-      </div>
-    </ng-template>
-    <!-- / Modal -->
+      </ng-template>
+      <!-- / Modal -->
+    </div>
   </div>
 </div>
