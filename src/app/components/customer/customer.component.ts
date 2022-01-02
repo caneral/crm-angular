@@ -26,6 +26,7 @@ export class CustomerComponent implements OnInit  {
    deleteCustomer(customer: Customer) {
      this.customerService.remove(customer);
      this.refreshCustomers();
+     this.collectionSize = CustomersDb.length
    }
 
    modalOpen(modalBasic:any, customerId:any) {
