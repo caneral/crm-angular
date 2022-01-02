@@ -12,7 +12,7 @@ export class CustomerAddComponent implements OnInit {
   isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  errorMessage: boolean=false;
+
   constructor(private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class CustomerAddComponent implements OnInit {
 
   submit() {
     let customer: Customer = {
-      id: this.getRandomId(4, 100),
+      id: CustomersDb.length + 1,
       name: this.firstFormGroup.value.name,
       surname: this.firstFormGroup.value.surname,
       email: this.secondFormGroup.value.email,
@@ -43,12 +43,5 @@ export class CustomerAddComponent implements OnInit {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-  isValid(valid:boolean){
-    console.log("Errors:",this.firstFormGroup)
-
-    console.log("valid",valid)
-    this.errorMessage = !valid
   }
 }
